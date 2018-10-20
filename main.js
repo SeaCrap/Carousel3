@@ -1,13 +1,10 @@
 let $allButtons = $('#buttons > button')
 let $slides = $('#slides')
 let $images = $slides.children('img')
-//clone(true) 意思是连带子孙元素一起克隆
-$firstCopy = $images.eq(0).clone(true)
-$lastCopy = $images.eq($images.length - 1).clone(true)
-//append()：最后一个元素后追加
-//prepend()：第一个元素前插入
-$slides.append($firstCopy)
-$slides.prepend($lastCopy)
+
+makeFakeSlides()
+
+
 
 //因为当前
 $slides.css({transform:'translateX(-400px)'})
@@ -49,3 +46,14 @@ $allButtons.eq(2).on('click',()=>{
   }
   current = 2
 })
+
+// 克隆图片
+function makeFakeSlides(){
+  //clone(true) 意思是连带子孙元素一起克隆
+  $firstCopy = $images.eq(0).clone(true)
+  $lastCopy = $images.eq($images.length - 1).clone(true)
+  //append()：最后一个元素后追加
+  //prepend()：第一个元素前插入
+  $slides.append($firstCopy)
+  $slides.prepend($lastCopy)  
+}
