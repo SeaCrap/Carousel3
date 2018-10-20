@@ -6,7 +6,7 @@
   margin: 20px auto;
   overflow: hidden;
 }
-.images{
+.slides{
   width: 100%;
   display: flex;
   transition: all 0.5s;
