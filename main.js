@@ -8,7 +8,7 @@ makeFakeSlides()
 //初始位置是克隆的第一张 需要把真正的第一张放到初始位置
 $slides.css({transform:'translateX(-400px)'})
 
-//监听事件
+//绑定事件
 bindEvents()
 
 
@@ -32,7 +32,7 @@ function makeFakeSlides(){
   $slides.prepend($lastCopy)  
 }
 
-//事件监听
+//绑定事件
 function bindEvents(){
   let current = 0 //记录当前点 
   $allButtons.eq(0).on('click',()=>{
