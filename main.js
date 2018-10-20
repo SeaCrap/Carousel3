@@ -16,14 +16,19 @@ $slides.css({transform:'translateX(-400px)'})
 let current = 0 //记录当前点 
 $allButtons.eq(0).on('click',()=>{
   if(current === 2){
-    console.log('说明是从最后一张过来的')
     $slides.css({transform:'translateX(-1600px)'})
-    current = 0 // 去了哪里
+      .one('transitionend',()=>{
+        $slides.hide()
+          .offset()//计算css会阻断hide和show合并 这样-1600～~400 时就就先隐藏在出现了
+                  //一般hide之后show没反应 中间就添加offset就可以 offset返回是是一个对象
+        $slides.css({transform:'translateX(-400px)'})
+          .show()
+      })
+
   }else{
       $slides.css({transform:'translateX(-400px)'})
-      current = 0 // 去了哪里
   }
-
+  current = 0
 })
 $allButtons.eq(1).on('click',()=>{
   console.log(current)
@@ -32,8 +37,15 @@ $allButtons.eq(1).on('click',()=>{
 })
 $allButtons.eq(2).on('click',()=>{
   if(current === 0){
-    console.log('说明是从第一张过来的')
+    $slides.css({transform:'translateX(0px)'})
+      .one('transitionend',()=>{
+        $slides.hide()
+          .offset()
+        $slides.css({transform:'translateX(-1200px)'})
+          .show()
+      })
+  }else{
+    $slides.css({transform:'translateX(-1200px)'})
   }
-  $slides.css({transform:'translateX(-1200px)'})
   current = 2
 })
