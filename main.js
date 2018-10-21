@@ -41,23 +41,29 @@ function bindEvents(){
 }
 
 function goToSlides(index){
-   //最后一张到第一张
-    if(current === $allButtons.length - 1 && index === 0){
-      $slides.css({transform:`translateX(${-($allButtons.length + 1) * 400}px)`})
+  //上一张下一张不能超过length做判断
+  if(index > $allButtons.length - 1){
+    index = 0
+  }else if(index < 0){
+    index = $allButtons.length - 1
+  }
+  //最后一张到第一张
+  if(current === $allButtons.length - 1 && index === 0){
+    $slides.css({transform:`translateX(${-($allButtons.length + 1) * 400}px)`})
+    .one('transitionend',()=>{
+      $slides.hide().offset()
+      $slides.css({transform:`translateX(${-(index+1) * 400}px)`}).show()
+    })
+  //第一张到最后一张
+  }else if(current === 0 && index === $allButtons.length - 1){
+    $slides.css({transform:`translateX(0px)`})
       .one('transitionend',()=>{
         $slides.hide().offset()
         $slides.css({transform:`translateX(${-(index+1) * 400}px)`}).show()
       })
-    //第一张到最后一张
-    }else if(current === 0 && index === $allButtons.length - 1){
-      $slides.css({transform:`translateX(0px)`})
-        .one('transitionend',()=>{
-          $slides.hide().offset()
-          $slides.css({transform:`translateX(${-(index+1) * 400}px)`}).show()
-        })
       //其他正常程序走
-      }else{
-        $slides.css({transform:`translateX(${-(index+1) * 400}px)`})
-      }
-      current = index
+  }else{
+    $slides.css({transform:`translateX(${-(index+1) * 400}px)`})
+  }
+  current = index
 }
