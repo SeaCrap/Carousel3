@@ -12,7 +12,13 @@ $slides.css({transform:'translateX(-400px)'})
 //监听事件
 bindEvents()
 
-
+//goToSlides ===> 上一张下一张
+$(next).on('click',()=>{
+  goToSlides(current+1)
+})
+$(previous).on('click',()=>{
+  goToSlides(current-1)
+})
 // 克隆图片
 function makeFakeSlides(){
   //clone(true) 意思是连带子孙元素一起克隆
