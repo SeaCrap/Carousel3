@@ -1,3 +1,4 @@
+//初始化
 let $allButtons = $('#buttons > button')
 let $slides = $('#slides')
 let $images = $slides.children('img')
@@ -19,6 +20,27 @@ $(next).on('click',()=>{
 $(previous).on('click',()=>{
   goToSlides(current-1)
 })
+
+// 自动播放
+let timer = setInterval(function(){
+  goToSlides(current+1)
+},2000)
+
+//鼠标悬停
+$('.container').on('mouseenter',()=>{
+  window.clearInterval(timer)
+}).on('mouseleave',()=>{
+  timer = setInterval(function(){
+    goToSlides(current+1)
+  },2000)  
+})
+
+
+
+//******************一下是封装好的函数 请不要看******************//
+
+
+
 // 克隆图片
 function makeFakeSlides(){
   //clone(true) 意思是连带子孙元素一起克隆
